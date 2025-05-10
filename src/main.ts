@@ -7,7 +7,7 @@ async function bootstrap() {
 
   // ✅ Aktifkan CORS
   app.enableCors({
-    origin: 'http://localhost:3001', // sesuaikan dengan domain frontend kamu
+    origin: `https://alarm-tag.vercel.app/`, // sesuaikan dengan domain frontend kamu
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
