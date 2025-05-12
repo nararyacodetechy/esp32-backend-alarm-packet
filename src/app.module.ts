@@ -4,8 +4,6 @@ import { PacketsModule } from './packets/packets.module'; // Misalnya ada module
 import { PacketsController } from './packets/packets.controller';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { WifiController } from './wifi/wifi.controller';
-import { WifiModule } from './wifi/wifi.module';
 import { AlarmModule } from './alarm/alarm.module';
 
 @Module({
@@ -18,9 +16,8 @@ import { AlarmModule } from './alarm/alarm.module';
     }),
     PacketsModule,
     AlarmModule,
-    WifiModule,
   ],
-  controllers: [AppController, PacketsController, WifiController],
+  controllers: [AppController, PacketsController],
   providers: [AppService],
 })
 export class AppModule {}

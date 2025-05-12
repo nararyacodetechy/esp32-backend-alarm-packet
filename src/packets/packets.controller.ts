@@ -40,4 +40,20 @@ export class PacketsController {
     return this.packetService.getPacketByResi(resi);
   }
 
+  // ✅ Connect Device
+  @Put(':resi/connect')
+  async connectDevice(
+    @Param('resi') resi: string,
+    @Body() body: { device_id: string }
+  ) {
+    const { device_id } = body;
+    return this.packetService.connectDeviceToResi(resi, device_id);
+  }
+
+  // ✅ Disconnect Device
+  @Put(':resi/disconnect')
+  async disconnectDevice(@Param('resi') resi: string) {
+    return this.packetService.disconnectDeviceFromResi(resi);
+  }
+
 }

@@ -77,4 +77,47 @@ export class PacketsService {
       data: packet,
     };
   }  
+
+  // ✅ Connect Device to Resi
+  async connectDeviceToResi(resi: string, deviceId: string): Promise<any> {
+    if (!deviceId) {
+      return { message: 'Device ID is required', status: 'error' };
+    }
+
+    const packet = await this.packetRepository.findOneBy({ resi });
+    if (!packet) {
+      return { message: `Paket dengan resi "${resi}" tidak ditemukan`, status: 'error' };
+    }
+
+    packet.device_id = deviceId;
+    const updated = await this.packetRepository.save(packet);
+
+    return {
+      message: 'Device successfully connected to resi',
+      status: 'success',
+      data: updated,
+    };
+  }
+
+  // ✅ Disconnect Device from Resi
+  async disconnectDeviceFromResi(resi: string): Promise<any> {
+    const packet = await this.packetRepository.findOneBy({ resi });
+    if (!packet) {
+      return { message: `Paket dengan resi "${resi}" tidak ditemukan`, status: 'error' };
+    }
+
+    if (!packet.device_id) {
+      return { message: 'Device is not connected to this resi', status: 'error' };
+    }
+
+    packet.device_id = null;
+    const updated = await this.packetRepository.save(packet);
+
+    return {
+      message: 'Device successfully disconnected from resi',
+      status: 'success',
+      data: updated,
+    };
+  }
+
 }

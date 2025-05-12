@@ -16,4 +16,7 @@ export class Packet {
 
   @Column()
   order: string;
+
+  @Column({ type: 'varchar', nullable: true })  // ✅ tambahkan nullable: true
+  device_id: string | null;
 }
